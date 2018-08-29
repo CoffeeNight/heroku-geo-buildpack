@@ -7,10 +7,14 @@ if [ "$GDAL_VERSION" == "" ]; then
 fi
 
 # workspace directory
-workspace="$(mktemp -d)"
+# workspace="$(mktemp -d)"
+workspace="/tmp/gdal_workspace"
+mkdir $workspace
 
 # output directory
-output="$(mktemp -d)"
+# output="$(mktemp -d)"
+output="/tmp/gdal_output"
+mkdir $output
 
 # build and package gdal for heroku
 pushd $workspace
@@ -22,7 +26,7 @@ make install
 
 pushd $output
 tar -czf gdal-$GDAL_VERSION.tgz *
-aws s3 cp --acl public-read gdal-$GDAL_VERSION.tgz s3://$S3_BUCKET/$STACK/
+# aws s3 cp --acl public-read gdal-$GDAL_VERSION.tgz s3://$S3_BUCKET/$STACK/
 
 echo $GDAL_VERSION > manifest.gdal
-aws s3 cp --acl public-read manifest.gdal s3://$S3_BUCKET/$STACK/
+# aws s3 cp --acl public-read manifest.gdal s3://$S3_BUCKET/$STACK/

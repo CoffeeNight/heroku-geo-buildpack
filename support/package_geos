@@ -7,10 +7,14 @@ if [ "$GEOS_VERSION" == "" ]; then
 fi
 
 # workspace directory
-workspace="$(mktemp -d)"
+# workspace="$(mktemp -d)"
+workspace="/tmp/geos_workspace"
+mkdir $workspace
 
 # output directory
-output="$(mktemp -d)"
+# output="$(mktemp -d)"
+output="/tmp/geos_output"
+mkdir $output
 
 # build and package geos for heroku
 pushd $workspace
@@ -22,8 +26,8 @@ make install
 
 pushd $output
 tar -czf geos-$GEOS_VERSION.tgz *
-aws s3 cp --acl public-read geos-$GEOS_VERSION.tgz s3://$S3_BUCKET/$STACK/
+# aws s3 cp --acl public-read geos-$GEOS_VERSION.tgz s3://$S3_BUCKET/$STACK/
 
 echo $GEOS_VERSION > manifest.geos
-aws s3 cp --acl public-read manifest.geos s3://$S3_BUCKET/$STACK/
+# aws s3 cp --acl public-read manifest.geos s3://$S3_BUCKET/$STACK/
 
