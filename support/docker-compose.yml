@@ -6,7 +6,7 @@ geo-builder:
     GEOS_VERSION: "3.4.2"
     AWS_ACCESS_KEY_ID:
     AWS_SECRET_ACCESS_KEY:
-    STACK: "cedar-14"
+    STACK: "heroku-18"
     S3_BUCKET: "lomotif-heroku"
   command: bash -c './geo-build'
   volumes:

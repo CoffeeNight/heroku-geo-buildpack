@@ -1,4 +1,4 @@
-FROM heroku/cedar:14
+FROM heroku/heroku:18
 MAINTAINER cyberdelia
 
 RUN apt-get -q update
